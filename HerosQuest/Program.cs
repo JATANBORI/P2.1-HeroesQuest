@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HeroesQuest
+namespace HerosQuest
 {
     class Program
     {
@@ -71,10 +67,16 @@ namespace HeroesQuest
 
         } // Main method end
 
+        /// <summary>
+        /// Prints welcome message and sets up the three heroes by asking the user to input names for each
+        /// </summary>
+        /// <param name="ranger">Ranger character to be set up</param>Output
+        /// <param name="mage">Mage character to be set up</param>
+        /// <param name="barbarian">Barbarian character to be set up</param>
         private static void SetupCharacters(out Character ranger, out Character mage, out Character barbarian)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Welcome to hero's quest!");
+            Console.WriteLine("Welcome to hero's quest! - A quest for heroes!");
             Console.WriteLine("Player 1 - You are the Ranger! Name your character!");
             string name = Console.ReadLine();
             ranger = new Character("ranger", name);
@@ -93,6 +95,12 @@ namespace HeroesQuest
             Console.WriteLine("Welcome " + barbarian._Name + ", the strongest barbarian in all of Hullidian!");
         }
 
+        /// <summary>
+        /// Takes a turn for the ranger character, against the mage and barbarian opponents
+        /// </summary>
+        /// <param name="ranger">Ranger character taking turn</param>
+        /// <param name="mage">Mage character opponent</param>
+        /// <param name="barbarian">Barbarian character opponent</param>
         private static void TakeRangerTurn(Character ranger, Character mage, Character barbarian)
         {
             string rangerMenu = "1. Rest.\r\n" +
@@ -150,6 +158,12 @@ namespace HeroesQuest
             }
         }
 
+        /// <summary>
+        /// Takes a turn for the mage character, against the ranger and barbarian opponents
+        /// </summary>
+        /// <param name="ranger">Ranger character opponent</param>
+        /// <param name="mage">Mage character taking turn</param>
+        /// <param name="barbarian">Barbarian character opponent</param>
         private static void TakeMageTurn(Character ranger, Character mage, Character barbarian)
         {
 
@@ -160,7 +174,7 @@ namespace HeroesQuest
                                             "5. Throw fireball at " + barbarian._Name + " the barbarian.\r\n" +
                                             "6. Cast healing spell on yourself.\r\n" +
                                             "7. Cast healing spell on " + ranger._Name + " the ranger.\r\n" +
-                                            "   You will become allies for " + ranger._Name + "''s next turn.\r\n" +
+                                            "   You will become allies for " + ranger._Name + "'s next turn.\r\n" +
                                             "8. Cast healing spell on " + barbarian._Name + " the barbarian.\r\n" +
                                             "   You will become allies for " + barbarian._Name + "'s next turn.\r\n";
 
@@ -211,6 +225,13 @@ namespace HeroesQuest
             } while (!successfulAction);
 
         }
+
+        /// <summary>
+        /// Takes a turn for the barbarian character, against the ranger and mage opponents
+        /// </summary>
+        /// <param name="ranger">Ranger character opponent</param>
+        /// <param name="mage">Mage character opponent</param>
+        /// <param name="barbarian">Barbarian character taking turn</param>
         private static void TakeBarbarianTurn(Character ranger, Character mage, Character barbarian)
         {
             string barbarianMenu = "1. Rest.\r\n" +
@@ -261,6 +282,13 @@ namespace HeroesQuest
             }
         }
 
+        /// <summary>
+        /// Gets number from the user within the specified range.
+        /// </summary>
+        /// <param name="pPrompt">prompt to display to the user.</param>
+        /// <param name="pMin">Inclusive minimum value that could be returned.</param>
+        /// <param name="pMax">Inclusive maximum value that could be returned.</param>
+        /// <returns></returns>
         private static int GetNumberInRange(string pPrompt, int pMin, int pMax)
         {
             int result = 0;

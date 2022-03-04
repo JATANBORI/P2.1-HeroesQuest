@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HeroesQuest
+namespace HerosQuest
 {
     public class Character
     {
@@ -60,6 +56,7 @@ namespace HeroesQuest
 
         public bool TakeEnergyPotion()
         {
+            // error string used to detect is anything is wrong
             string error = "";
 
             if (_EnergyPotions < 1)
@@ -72,12 +69,14 @@ namespace HeroesQuest
                 error += "You need at least 1 energy to use a potion.\r\n";
             }
 
+            // If anything is wrong output the error(s) and return false
             if (error.Length > 0)
             {
                 Console.WriteLine(error);
                 return false;
             }
 
+            // nothing wrong, so do the action, output result and return true
             _Energy--;
             _Energy += _MaxEnergy / 2;
             Console.WriteLine("You take an energy potion.");
@@ -87,6 +86,7 @@ namespace HeroesQuest
 
         public bool TakeHealthPotion()
         {
+            // error string used to detect is anything is wrong
             string error = "";
 
             if (_HealthPotions < 1)
@@ -99,12 +99,14 @@ namespace HeroesQuest
                 error += "You need at least 1 energy to use a potion.\r\n";
             }
 
+            // If anything is wrong output the error(s) and return false
             if (error.Length > 0)
             {
                 Console.WriteLine(error);
                 return false;
             }
 
+            // nothing wrong, so do the action, output result and return true
             _Energy--;
             _Health += _MaxHealth / 2;
             Console.WriteLine("You take a health potion.");
@@ -126,11 +128,14 @@ namespace HeroesQuest
 
         public bool FireBow(Character pTarget)
         {
-            string error = "";
+            // should never happen, so throw an exception
             if (_CharacterType != "ranger")
             {
                 throw new Exception(_CharacterType + " cannot use a bow.");
             }
+
+            // error string used to detect is anything is wrong
+            string error = "";
 
             if (_NumberOfArrows == 0)
             {
@@ -147,12 +152,14 @@ namespace HeroesQuest
                 error += "You cannot attack " + pTarget + " because you are allied with them this turn.";
             }
 
+            // If anything is wrong output the error(s) and return false
             if (error.Length > 0)
             {
                 Console.WriteLine(error);
                 return false;
             }
 
+            // nothing wrong, so do the action, output result and return true
             _NumberOfArrows--;
             _Energy--;
             Console.WriteLine(_Name + " releases a deadly arrow towards the " + pTarget._Name);
@@ -189,11 +196,13 @@ namespace HeroesQuest
 
         public bool PickUpArrows()
         {
+            // should never happen, so throw an exception
             if (_CharacterType != "ranger")
             {
                 throw new Exception(_CharacterType + " cannot pick up arrows.");
             }
 
+            // error string used to detect is anything is wrong
             string error = "";
 
             if (_Energy < 1)
@@ -201,21 +210,32 @@ namespace HeroesQuest
                 error += "You need at least 1 energy to pick up arrows.";
             }
 
+            // If anything is wrong output the error(s) and return false
+            if (error.Length > 0)
+            {
+                Console.WriteLine(error);
+                return false;
+            }
+
+            // nothing wrong, so do the action, output result and return true
             _Energy--;
 
             int minimumArrows = Math.Min(2, _MaxNumberOfArrows - _NumberOfArrows);
-            _NumberOfArrows += rng.Next(minimumArrows, _MaxNumberOfArrows - _NumberOfArrows);
-
+            int arrowsCollected = rng.Next(minimumArrows, _MaxNumberOfArrows - _NumberOfArrows);
+            _NumberOfArrows += arrowsCollected;
+            Console.WriteLine(_Name + " the ranger picked up " + arrowsCollected + " and now has " + _NumberOfArrows + "/" + _MaxNumberOfArrows);
             return true;
         }
 
         public bool SwingAxe(Character pTarget)
         {
+            // should never happen, so throw an exception
             if (_CharacterType != "barbarian")
             {
                 throw new Exception(_CharacterType + " cannot use an axe.");
             }
 
+            // error string used to detect is anything is wrong
             string error = "";
 
             if (pTarget._Health <= 0)
@@ -233,14 +253,16 @@ namespace HeroesQuest
                 error += "You cannot attack " + pTarget._Name + " because you are allied with them this turn.";
             }
 
+            // If anything is wrong output the error(s) and return false
             if (error.Length > 0)
             {
                 Console.WriteLine(error);
                 return false;
             }
 
-            Console.WriteLine(_Name + " swings his mighty axe at " + pTarget._Name);
+            // nothing wrong, so do the action, output result and return true
 
+            Console.WriteLine(_Name + " swings his mighty axe at " + pTarget._Name);
             int damageMultiplier = 1;
             if (_Rage >= _MaxRage)
             {
@@ -284,11 +306,13 @@ namespace HeroesQuest
 
         public bool ThrowFireball(Character pTarget)
         {
+            // should never happen, so throw an exception
             if (_CharacterType != "mage")
             {
                 throw new Exception(_CharacterType + " cannot throw a fireball.");
             }
 
+            // error string used to detect is anything is wrong
             string error = "";
 
             if (pTarget._Health <= 0)
@@ -306,12 +330,14 @@ namespace HeroesQuest
                 error += "You cannot attack " + pTarget + " because you are allied with them this turn.";
             }
 
+            // If anything is wrong output the error(s) and return false
             if (error.Length > 0)
             {
                 Console.WriteLine(error);
                 return false;
             }
 
+            // nothing wrong, so do the action, output result and return true
             int roll = rng.Next(1, 21);
 
             if (roll == 3)
@@ -340,11 +366,13 @@ namespace HeroesQuest
 
         public bool HealPlayer(Character pTarget)
         {
+            // should never happen, so throw an exception
             if (_CharacterType != "mage")
             {
                 throw new Exception(_CharacterType + " cannot heal a player.");
             }
 
+            // error string used to detect is anything is wrong
             string error = "";
 
             if (pTarget._Health <= 0)
@@ -357,12 +385,14 @@ namespace HeroesQuest
                 error += "You need at least 1 energy to heal a player.";
             }
 
+            // If anything is wrong output the error(s) and return false
             if (error.Length > 0)
             {
                 Console.WriteLine(error);
                 return false;
             }
 
+            // nothing wrong, so do the action, output result and return true
             pTarget._Health += rng.Next(3, 7);
             if (pTarget != this)
             {
@@ -371,6 +401,9 @@ namespace HeroesQuest
             return true;
         }
 
+        /// <summary>
+        /// Outputs the state of this instance of character to the console
+        /// </summary>
         public void OutputState()
         {
             string output = _Name + " the " + _CharacterType + ":" + _Health + "/" + _MaxHealth + " Health. " + _Energy + "/" + _MaxEnergy + " Energy. ";

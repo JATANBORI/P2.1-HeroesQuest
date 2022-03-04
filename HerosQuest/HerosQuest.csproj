@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D5BF2992-1BA8-46A2-AF4A-13449638BF33}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HeroesQuest</RootNamespace>
-    <AssemblyName>HeroesQuest</AssemblyName>
+    <RootNamespace>HerosQuest</RootNamespace>
+    <AssemblyName>HerosQuest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
